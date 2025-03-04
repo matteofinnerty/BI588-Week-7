@@ -1,0 +1,115 @@
+---
+title: "Module 12 Notes"
+output: html_document
+date: "2025-03-04"
+---
+
+**Covariance**
+
+- we often describe the relationship between two variables using the correlation coefficeint
+- this is on a scale from -1 to 1
+- calculated with the equation: 
+- there are multiple methods of correlation coefficient (pearson, spearman)
+- correlation coefficient is represented by rho 
+- positive rho --> positive correlation
+- negative rho --> negative correlation
+- magnitude of rho indicates strength of correlation 
+
+**Regression**
+
+- the set of tools that allows us to explore the relationship between models 
+- purposes of undertaking regression analyses
+    a. to use one or more variables to predict the value of another
+    b. to develop and choose among different models of the relationship between variables
+    c. to do analyses of covariation to determine different variables' relative explanatory power over another variable
+    
+**Bivariate Regression**
+
+- only 2 variables: 1 response, 1 predictor
+- Y = B0 + B1Xi + Ei
+- B0 is intercept
+- B1 is slope / relationship
+- Ei is the error (residuals; points that are not on the line, and therefore not 100% explained by the linear model)
+
+**Regression Cont.**
+
+- B0 and B1 are referred to as the regression coefficients
+- Regression analysis seeks to find B0 and B1 while minimizing error 
+- Regression analysis assumes that x controls y. 
+    a. therefore, the error term is assumed to be restricted to the y dimension (this is why we look at residuals y            distance from best-fit line, not x distance )
+- we use "ordinary least squares" as our criterion for best fit (squaring gets rid of any negatives)
+- this is called the OLS linear regression
+
+*Example of doing a OLS model by hand on module*
+
+- However, there is the lm() function, which makes a linear regression easy
+    a. lm(y variable ~ x variable, data = data)
+- Other functions can be used to get linear modeling related terms, including coefficients, residuals...
+
+*OLS IS A MODEL I REGRESSION
+
+**Model II Regression**
+
+- accets that there is uncertainty in our predictor variables
+- this is much better for field experiments, while model I is better for controlled lab experiments, where x does not vary on its own. 
+- this also aknowledges that we don't know the relationship between x and y. For example, y may be influencing x, or both may be influenced by a different variable.
+- model 2 regression looks to minimize the direct (not vertical as in model I) distance from residuals to the best-fit line
+- there are several different types of model II regressions
+- uses lmodel2() function
+
+**Zombie Regression Coefficients Challenge**
+
+- Plot zombie height (y) as a function of age (x)
+- Derive by hand the ordinary least squares regression coefficients 𝛽1 and 𝛽0
+for these data.
+- Confirm that you get the same results using the lm() function
+- Repeat the analysis above for males and females separately (our non-binary sample may be too small, but you can try that,   too, if you’re interested). Do your regression coefficients differ? How might you determine this?
+```{r}
+#import dataset
+library(curl)
+file <- curl("https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/refs/heads/master/AN588_Spring25/zombies.csv")
+z <- read.csv(file, header = T, sep = ",", stringsAsFactors = F)
+
+#define means (for B0 calculation)
+meanAge <- mean(z$age)
+meanHeight <- mean(z$height)
+
+#find B1 (slope) and B0 (intercept) 
+beta1 <- cor(z$age, z$height) * (sd(z$height)/sd(z$age))
+print(beta1)
+
+beta0 <- meanHeight - beta1*(meanAge)
+print(beta0)
+
+lm(height~age, z)
+
+
+
+```
+
+**Statistical Inference in Regression**
+
+- we want to evaluate if there is statistical evidence that there is a relationship between the two variables
+- the lm() function has several useful ouputs
+    a. the R^2 tells us what proportion of the variation in y is explained by x
+    b. standard error of the estimate 
+    c. we can get confidence intervals
+    
+**Interpreting Regression Coefficients and Prediction** 
+
+- B0, the intercept, is the predicted value of y when x is zero
+- the slope, B1, is expected change in y for every 1 unit change in x
+- this allows us to predict y when given x
+
+- predict() function
+    a. allow us to generate predicted y values given a vector of x values
+    
+**Residuals**
+- what is left over after we have defined the relationship between x and y
+    a. in other words, what points are not well explained by the best-fit line
+- in regression we assume that our residuals are normal random variables
+- residuals are often used to create "covairate adjusted" variables ...
+
+
+
+
