@@ -4,26 +4,22 @@ output: html_document
 date: "2025-03-04"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+**Analysis of Variance and ANOVA Tables**
 
-## R Markdown
+- ANOVA is a special case of a linear model 
+- in linear modeals, we can sepearate the total variation in our y varaible into that explained by our model (wdajflh) and that which is left over as error (the error sum of squares)
+- 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+asdfjiouhigasfg
+afsgfasfaj
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
-```
+**Standard Errors of Regression Coefficients**
 
-## Including Plots
+**Model Checking**
 
-You can also embed plots, for example:
+F^2 can tell you how real effective your model is 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+2 assumptions for linera modeling
+  a. residuals are normally (and randomly?) distributed
+  b. variance is constant for our Y values across range of Xs
