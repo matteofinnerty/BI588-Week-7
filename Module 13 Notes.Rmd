@@ -6,20 +6,55 @@ date: "2025-03-04"
 
 **Analysis of Variance and ANOVA Tables**
 
-- ANOVA is a special case of a linear model 
-- in linear modeals, we can sepearate the total variation in our y varaible into that explained by our model (wdajflh) and that which is left over as error (the error sum of squares)
-- 
-
-asdfjiouhigasfg
-afsgfasfaj
-
+- ANOVA is a essentially a special case of a linear model 
+- in linear models, we can separate the total variation in our y variable into that explained by our model and that which is left over as error
+- this is essentially what an anova does
+- SSY = sum of squares of y = total variation in y
+- SSR = sum of squares explained by the model 
+- SSE = the error sum of squares = the variation that is not explained by the model
+- F ratio = variance explained by the model / unexplained variance 
+- F ratio = MSR/MSE 
+    a. Here, MSR = SSR/df1 and MSE = SSE/df2
+- we want our F ratio to exceed a certain critical value
+    a. we can figure out what this critical value is by using the qf function --> qf(p = 1 - alpha, degrees of        freedom from regression (df1), degrees of freedom from error (df2) )
 
 **Standard Errors of Regression Coefficients**
 
+- this section explains how to calculate the standard error of regression coefficients, as well as any predicted y value (y hat)
+- it explains how to calculate the standard error for...
+    a. beta 1 (the slope)
+    b. beta 0 (the intercept)
+    c. y hat (the predicted y value given x)
+
 **Model Checking**
 
-F^2 can tell you how real effective your model is 
+- assessing how good our model is
+- so far we have...
+    a. seen what proportion of the variance our model explains
+    b. calculated standard erros for beta 1, beta 0, and y hat
+    c. seen if our regression model explains a *significant* proportion of the variance by using the F ratio test
+    
+- However, we have yet to check two assumptions of linear modeling (if these assumptions are untrue, we cannot accept our model)
+    1. the variables are normally distributed, AND the residuals are normally distributed
+    2. variance in y is constant across all values of x
+    
+**Checking residuals normality**
 
-2 assumptions for linera modeling
-  a. residuals are normally (and randomly?) distributed
-  b. variance is constant for our Y values across range of Xs
+- we can access our residuals a few ways. First run a linear model and assign that a variable. 
+Ex: m <- lm(data = d, height ~ weight)
+- then, we can access the residuals via m$residuals or resid(m)
+
+- we can assess normality a few ways
+  1. visually. make a histogram.
+  2. visually. make a Q-Q plot.
+  3. statistically. use a shapiro-wilks test (shapiro.test()) and look for a high p (the null hypothesis is normality)
+  
+**Data Transformations**
+
+- sometimes our data are not normal, but we can mathematically transform them to be normal!
+
+- Log transforming
+    a. takes the log of each y value
+    b. used when there is heavy skew, reduces the range and variation
+
+
