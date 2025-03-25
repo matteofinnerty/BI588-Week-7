@@ -6,25 +6,30 @@ date: "2025-03-04"
 
 **Covariance**
 
-- we often describe the relationship between two variables using the correlation coefficeint
-- this is on a scale from -1 to 1
-- calculated with the equation: 
-- there are multiple methods of correlation coefficient (pearson, spearman)
+- covariance describes how two variable change with one another
+- covariance is calculated by taking the sum of (the product of (x-xbar) * (y-ybar))/(n-1)
+- we often describe the relationship between two variable by using the correlation coefficient (r), which is a standardized form of the covariance
+    a. this is on a scale from -1 to 1 
+    b. it is calculated by taking the (cov(x,y))/(sd(x)sd(y))
+- there are multiple methods of calculating correlation coefficient (pearson, spearman)
 - correlation coefficient is represented by rho 
 - positive rho --> positive correlation
 - negative rho --> negative correlation
 - magnitude of rho indicates strength of correlation 
+- there is an r function for calculating the correlation coefficient, it is cor(x, y, method = "method")
 
 **Regression**
 
-- the set of tools that allows us to explore the relationship between models 
+- the set of tools that allows us to explore the relationship between two variables even further
 - purposes of undertaking regression analyses
     a. to use one or more variables to predict the value of another
     b. to develop and choose among different models of the relationship between variables
     c. to do analyses of covariation to determine different variables' relative explanatory power over another variable
+- general purpose is to tell us the mean value of a response variable given a predictor variable
     
 **Bivariate Regression**
 
+- linear regression with a single predictor and single response 
 - only 2 variables: 1 response, 1 predictor
 - Y = B0 + B1Xi + Ei
 - B0 is intercept
@@ -34,13 +39,14 @@ date: "2025-03-04"
 **Regression Cont.**
 
 - B0 and B1 are referred to as the regression coefficients
-- Regression analysis seeks to find B0 and B1 while minimizing error 
-- Regression analysis assumes that x controls y. 
-    a. therefore, the error term is assumed to be restricted to the y dimension (this is why we look at residuals y            distance from best-fit line, not x distance )
+- Regression analysis seeks to find B0 and B1 while minimizing the error term
+- Regression analysis assumes that x is controlled, and controls y. 
+    a. therefore, the error term is assumed to be restricted to the y dimension (this is why we look at residuals y distance from best-fit line, not x distance )
 - we use "ordinary least squares" as our criterion for best fit (squaring gets rid of any negatives)
 - this is called the OLS linear regression
-
-*Example of doing a OLS model by hand on module*
+- Model I regression
+    a. basically OLS regression
+    b. used when x is measured without error (or very little uncertainty) or when x is set by a researcher
 
 - However, there is the lm() function, which makes a linear regression easy
     a. lm(y variable ~ x variable, data = data)
@@ -50,12 +56,12 @@ date: "2025-03-04"
 
 **Model II Regression**
 
-- accets that there is uncertainty in our predictor variables
+- accepts that there is uncertainty in our predictor variables, or that our predictor variable may not even be the "predictor"
 - this is much better for field experiments, while model I is better for controlled lab experiments, where x does not vary on its own. 
-- this also aknowledges that we don't know the relationship between x and y. For example, y may be influencing x, or both may be influenced by a different variable.
+- this also acknowledges that we don't know the relationship between x and y. For example, y may be influencing x, or both may be influenced by a different variable.
 - model 2 regression looks to minimize the direct (not vertical as in model I) distance from residuals to the best-fit line
 - there are several different types of model II regressions
-- uses lmodel2() function
+- uses lmodel2() function from {lmodel2} package
 
 **Zombie Regression Coefficients Challenge**
 
@@ -106,9 +112,10 @@ lm(height~age, z)
     
 **Residuals**
 - what is left over after we have defined the relationship between x and y
-    a. in other words, what points are not well explained by the best-fit line
+- the distances of each point from the estimator line
 - in regression we assume that our residuals are normal random variables
-- residuals are often used to create "covairate adjusted" variables ...
+- residuals are often used to create "covariate adjusted" variables ...
+    a. if you look at only the residuals, you can exclude the effect of the x variable on y
 
 
 
